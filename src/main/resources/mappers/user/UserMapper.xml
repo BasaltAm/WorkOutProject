@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.basalt.toy.user.service.UserDAO">
+
+    <resultMap id="UserVoResult" type="com.basalt.toy.user.UserVo">
+        <result property="uId" column="UID" javaType="java.lang.Long"/>
+        <result property="email" column="USER_EMAIL" javaType="java.lang.String"/>
+        <result property="password" column="USER_PASSWORD" javaType="java.lang.String"/>
+        <result property="name" column="USER_NAME" javaType="java.lang.String"/>
+        <result property="age" column="USER_AGE" javaType="java.lang.Integer"/>
+    </resultMap>
+    <insert id="create">
+        <!--DB 컬럼명-->
+        insert into user(UID, USER_PASSWORD, USER_EMAIL, USER_NAME, USER_AGE)
+        <!--Vo 엔티티 변수 매핑-->
+        values(#{uId}, #{password}, #{email}, #{name}, #{age})
+    </insert>
+
+    <select id="read" resultMap="UserVoResult">
+    select *
+        FROM USER
+        WHERE UID = #{uID}
+    </select>
+
+    <select id="findByEmail" resultMap="UserVoResult">
+        select *
+        FROM USER
+        WHERE USER_EMAIL= #{email}
+    </select>
+
+    <update id="update">
+        update USER
+        set USER_PASSWORD = #{password},
+            USER_EMAIL = #{email},
+            USER_NAME = #{name},
+            USER_AGE = #{age},
+        Where UID = #{uId}
+    </update>
+
+    <delete id="delete">
+        delete
+        From USER
+        WHERE UID = #{uId}
+    </delete>
+
+    <select id="findAll" resultMap="UserVoResult">
+        <![CDATA[
+    select *
+        FROM USER
+    WEHRE UID >0 order by UID desc
+    ]]>
+    </select>
+</mapper>
