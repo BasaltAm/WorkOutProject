@@ -48,6 +48,9 @@ public class UserVo {
 
 	    public void setAge(int age) {
 	        this.age = age;
+			if(age<0){
+				throw new IllegalStateException("나이를 정확히 입력 하세요.");
+			}
 	    }
 
 	    @Override

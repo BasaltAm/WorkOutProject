@@ -45,6 +45,9 @@ public class UserController {
         if(bindingResult.hasErrors()){
             throw new BindExceptionWithViewName(bindingResult, "user/signUpForm", messageSource, locale);
         }
+        if(user.getAge() <= 0){
+            bindingResult.rejectValue("age","incorrect age","나이를 정확히 입력해주세요");
+        }
         userService.regist(user);
 
         return "redirect:/";

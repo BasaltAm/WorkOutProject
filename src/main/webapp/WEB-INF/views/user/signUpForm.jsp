@@ -62,7 +62,7 @@
                     </c:when>
                     <c:otherwise><c:remove var="value" /></c:otherwise>
                 </c:choose>
-                <input type="number" name="age" required placeholder="age" value="${value}" />
+                <input type="number" name="age" required placeholder="age" min="0" value="${value}" />
             </label>
             <button type="submit" class="before:content-['회원가입']"></button>
         </form>
